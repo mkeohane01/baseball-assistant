@@ -1,0 +1,7 @@
+# CI
+black
+pytest
+pylint
+
+# Flask
+flask
