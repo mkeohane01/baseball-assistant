@@ -5,3 +5,6 @@ pylint
 
 # Flask
 flask
+
+# Basbeall
+pybaseball
