@@ -8,6 +8,8 @@ Useful packages / APIs:
 - [ESPN Fantasy API](https://github.com/cwendt94/espn-api)
 - [Statcast Advanced Metrics](https://github.com/jldbc/pybaseball)
 
+LLM 
+- [Huggingfcae GGUF](https://huggingface.co/TheBloke/NexusRaven-V2-13B-GGUF)
 ## AI Agent
 
 Goal is to build an AI Agent that can call certain functions based on the input query. I may have to simplify this project to a premade db and rag.
@@ -42,3 +44,32 @@ Issues and Ideas
     - choose function, then populate variables
 - After getting info, need LLM to know how to use it
     - Incorporate pipeline to process data
+
+## Architecture
+
+```mermaid
+graph LR
+    A[Front End Chat Interface] --> B[LLM to Decide Function & Populate Parameters]
+    B --> C{Decision Point}
+    C -->|Sufficient Info| D[Call Corresponding Function]
+    C -->|Insufficient Info| E[Ask Follow-up Question]
+    D --> F[Function Response]
+    F --> G[LLM to Curate Response]
+    G --> H[Display Response in Front End]
+
+    E --> A
+```
+
+## Functions
+```python
+- get_hitter_info_statcast(player_name, daterange, specific_stat=None)
+
+- get_pitcher_info_statcast(player_name, daterange, specific_stat=None)
+
+- get_fantasy_points(player_name, daterange)
+
+- get_hitter_info_fangraphs(player_name, daterange)
+
+- get_pitcher_info_fangraphs(player_name, daterange)
+
+```
