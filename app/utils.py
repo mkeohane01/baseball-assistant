@@ -58,11 +58,13 @@ def get_pitching_stats(player: str = None, year: int = 2024):
 #!/usr/bin/env python3
 def query_llm_functions(prompt):
     client = OpenAI(
-        base_url="http://localhost:8080/v1", 
+        base_url= "http://127.0.0.1:8080/v1", # "http://<Your api-server IP>:port"
         api_key = "sk-no-key-required"
     )
     completion = client.chat.completions.create(
         model="LLaMA_CPP",
+        max_tokens = 150,
+        temperature = 0,
         messages=[
             {"role": "system", "content": 
              """
@@ -70,8 +72,9 @@ def query_llm_functions(prompt):
              Your top priority is determining which helpful baseball stats function to call based on the user input.
              Based on the user input, determine the player they are asking about as well as whether they are a batter or a pitcher.
              If you cannot determine this, ask a clarifying question, otherwise call the corresponding function.
-
-            Function:
+             NO EXPLANATIONS!
+             If multiple calls are needed, call all of the corresponding functions.    
+             Function:
                 def get_batting_stats(player: str = None, year: int = 2024):
                     ""
                     Get all of the hitting statistics for a specified MLB player
@@ -97,15 +100,16 @@ def query_llm_functions(prompt):
                         else:
                             string error message suggesting similar player names
                     ""
-                """
+            JUST GIVE POPULATED CALL FUNCTION, NO THOUGHT OR EXPLANATION!
+            """
              },
-            {"role": "user", "content": f"User Query: {prompt}<human_end>"}
+            {"role": "user", "content": f"{prompt}<human_end>"}
         ]
-        max_tokens = 150,
-        temperature = 0
     )
     return completion.choices[0].message
 
 if __name__ == '__main__':
     print(get_batting_stats("CJ Abras"))
     print(get_pitching_stats("Jake Irvin"))
+    response = query_llm_functions("How is CJ Abrams, hitter, and Jake Irvin, pitcher, performing this year?")
+    print(response)

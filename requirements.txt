@@ -8,3 +8,6 @@ flask
 
 # Basbeall
 pybaseball
+
+# LLM
+openai
