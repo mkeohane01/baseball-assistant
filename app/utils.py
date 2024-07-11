@@ -58,7 +58,7 @@ def get_pitching_stats(player: str = None, year: int = 2024):
 #!/usr/bin/env python3
 def query_llm_functions(prompt):
     client = OpenAI(
-        base_url="http://localhost:8080/v1", # "http://<Your api-server IP>:port"
+        base_url="http://localhost:8080/v1", 
         api_key = "sk-no-key-required"
     )
     completion = client.chat.completions.create(
@@ -71,7 +71,7 @@ def query_llm_functions(prompt):
              Based on the user input, determine the player they are asking about as well as whether they are a batter or a pitcher.
              If you cannot determine this, ask a clarifying question, otherwise call the corresponding function.
 
-             Function:
+            Function:
                 def get_batting_stats(player: str = None, year: int = 2024):
                     ""
                     Get all of the hitting statistics for a specified MLB player
@@ -101,6 +101,8 @@ def query_llm_functions(prompt):
              },
             {"role": "user", "content": f"User Query: {prompt}<human_end>"}
         ]
+        max_tokens = 150,
+        temperature = 0
     )
     return completion.choices[0].message
 
