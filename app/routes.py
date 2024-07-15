@@ -10,11 +10,11 @@ def index():
 def ask():
     data = request.get_json()
     question = data.get('question')
-    
+    print(question)
     # Use your LLM pipeline here to generate the response
-    answer = query_llm_llamafile(question)
-
-    return jsonify({'answer': answer})
+    answer = query_llm_llamafile(question).content
+    print(answer)
+    return jsonify({'answer': answer.split("<|")[0]})
 
 if __name__ == '__main__':
     app.run(debug=True)
