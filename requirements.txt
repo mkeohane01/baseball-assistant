@@ -3,8 +3,9 @@ black
 pytest
 pylint
 
-# Flask
+# App
 flask
+python-dotenv
 
 # Basbeall
 pybaseball
@@ -13,3 +14,4 @@ pybaseball
 # langsmith
 # langchain
 openai
+
