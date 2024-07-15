@@ -3,14 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Flask App</title>
+    <title>Baseball Chat</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Flask App</h1>
-        <p>This is a simple home screen.</p>
-        <a href="#" class="button">Get Started</a>
+        <header>
+            <h1>AI Baseball Chat</h1>
+        </header>
+        <main>
+            <div id="chat-container">
+                <div id="messages"></div>
+                <div id="input-container">
+                    <input type="text" id="user-input" placeholder="Ask a question about baseball...">
+                    <button id="send-btn">Send</button>
+                </div>
+            </div>
+        </main>
     </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
