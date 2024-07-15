@@ -55,8 +55,8 @@ def get_pitching_stats(player: str = None, year: int = 2024):
     else:
         return all_pitching_stats
     
-#!/usr/bin/env python3
-def query_llm_functions(prompt):
+
+def query_llm_llamafile(prompt):
     client = OpenAI(
         base_url= "http://127.0.0.1:8080/v1", # "http://<Your api-server IP>:port"
         api_key = "sk-no-key-required"
@@ -101,6 +101,8 @@ def query_llm_functions(prompt):
                             string error message suggesting similar player names
                     ""
             JUST GIVE POPULATED CALL FUNCTION, NO THOUGHT OR EXPLANATION!
+            If you need more information about the function call, ask a clarifying question.
+            For example, "What is the player's full name" or "Are they a batter or a pitcher?"
             """
              },
             {"role": "user", "content": f"{prompt}<human_end>"}

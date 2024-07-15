@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-
+from .utils import query_llm_llamafile
 app = Flask(__name__)
 
 @app.route('/')
@@ -10,9 +10,9 @@ def index():
 def ask():
     data = request.get_json()
     question = data.get('question')
-    print(data)
+    
     # Use your LLM pipeline here to generate the response
-    answer = "This is a placeholder answer to your question: " + question
+    answer = query_llm_llamafile(question)
 
     return jsonify({'answer': answer})
 
