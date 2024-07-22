@@ -2,8 +2,9 @@ name: CD
 
 on:
   push:
-    branches:
-      - main
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
 
 jobs:
   build:
@@ -25,7 +26,7 @@ jobs:
         context: .
         file: Dockerfile
         push: true
-        tags: your-dockerhub-username/your-repo:latest
+        tags: mkeohane01/baseball-agent:latest
 
     - name: Logout from Docker Hub
       run: docker logout
