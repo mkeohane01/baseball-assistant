@@ -13,3 +13,7 @@ pybaseball
 # langsmith
 # langchain
 openai
+
+#DB
+# sqlite3
+pandas

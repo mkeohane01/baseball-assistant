@@ -1,6 +1,8 @@
 .flaskenv
 llamafiles/
 experimentation/
+
+baseball_stats.db
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
