@@ -3,8 +3,9 @@ black
 pytest
 pylint
 
-# Flask
+# App
 flask
+python-dotenv
 
 # Basbeall
 pybaseball

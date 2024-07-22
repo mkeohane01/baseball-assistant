@@ -113,5 +113,5 @@ def query_llm_llamafile(prompt):
 if __name__ == '__main__':
     print(get_batting_stats("CJ Abras"))
     print(get_pitching_stats("Jake Irvin"))
-    response = query_llm_functions("How is CJ Abrams, hitter, and Jake Irvin, pitcher, performing this year?")
-    print(response)
+    # response = query_llm_llamafile("How is CJ Abrams, hitter, and Jake Irvin, pitcher, performing this year?")
+    # print(response)

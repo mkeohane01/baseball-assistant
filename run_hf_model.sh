@@ -5,7 +5,7 @@ download_if_not_exists() {
     local url=$1
     local output=$2
     if [ ! -f "$output" ]; then
-        mkdir llamafiles/
+        mkdir -p "$(dirname "$output")"
         echo "Downloading $output..."
         curl -L -o "$output" "$url"
     else
@@ -20,7 +20,7 @@ download_if_not_exists "https://github.com/Mozilla-Ocho/llamafile/releases/downl
 download_if_not_exists "https://huggingface.co/TheBloke/NexusRaven-V2-13B-GGUF/resolve/main/nexusraven-v2-13b.Q4_K_M.gguf" "llamafiles/nexusraven-v2-13b.gguf"
 
 # Make the executable file executable
-chmod +x llamafile.exe
+chmod +x llamafiles/llamafile.exe
 
 # Run the model
-./llamafile.exe -m llamafiles/nexusraven-v2-13b.gguf
+./llamafiles/llamafile.exe -m llamafiles/nexusraven-v2-13b.gguf
