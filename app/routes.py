@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-from .utils import query_llm_llamafile
+from src.llm_pipelining import query_llm_llamafile
 app = Flask(__name__)
 
 @app.route('/')
