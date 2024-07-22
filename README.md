@@ -1,6 +1,8 @@
 # Fantasy Baseball Help Bot - AIPI 561
 
-[![CI](https://github.com/mkeohane01/flask-template/actions/workflows/ci.yml/badge.svg)](https://github.com/mkeohane01/flask-template/actions/workflows/ci.yml)
+[![CI](https://github.com/mkeohane01/baseball-assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/mkeohane01/baseball-assistant/actions/workflows/ci.yml)
+
+[![CD](https://github.com/mkeohane01/baseball-assistant/actions/workflows/cd.yml/badge.svg)](https://github.com/mkeohane01/baseball-assistant/actions/workflows/cd.yml)
 
 Build an application where users can ask questions about baseball players, check in on their own league/team, and seek advice about free agent options. It will pull real information either directly from the sources using APIs or through pre-loaded databases and webscraping.
 
