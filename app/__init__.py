@@ -14,7 +14,4 @@ def create_app():
 
     return baseball_app
 
-#if you want to run the app directly from this file
-if __name__ == "__main__":
-    baseball_app = create_app()
-    baseball_app.run()
+
