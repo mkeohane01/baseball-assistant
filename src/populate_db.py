@@ -3,6 +3,9 @@ import pandas as pd
 from pybaseball import batting_stats, pitching_stats
 
 def update_pitching_stats(year=2024):
+    """
+    Update the pitching stats database for the given year.
+    """
     # Fetch pitching stats for the given year
     stats = pitching_stats(year, qual=20)
     # Select the relevant columns
@@ -14,7 +17,10 @@ def update_pitching_stats(year=2024):
     
     stats = stats[selected_columns]
     
-    # Print the first few rows and data types to diagnose issues
+    # Round all numerical columns to 2 decimal places
+    for col in stats.columns:
+        if stats[col].dtype in [float, int]:
+            stats[col] = stats[col].round(2)
     # print(stats.head(2))
     print("\nPitcher db shape:")
     # print(stats.dtypes)
@@ -83,6 +89,9 @@ def update_pitching_stats(year=2024):
     conn.close()
 
 def update_hitting_stats(year=2024):
+    """
+    Update the hitting stats database for the given year.
+    """
     # Fetch hitting stats for the given year
     stats = batting_stats(year, qual=25)
     # Select the relevant columns
@@ -93,6 +102,12 @@ def update_hitting_stats(year=2024):
         'xBA', 'xSLG', 'xwOBA'
     ]
     stats = stats[selected_columns]
+
+    # Round all numerical columns to 2 decimal places
+    for col in stats.columns:
+        if stats[col].dtype in [float, int]:
+            stats[col] = stats[col].round(2)
+
     # print(stats.head(2))
     print("\nHitter db shape:")
     print(stats.shape)

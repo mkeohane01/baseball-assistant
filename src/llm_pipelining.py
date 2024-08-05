@@ -1,117 +1,89 @@
 import pybaseball as pyb
 import difflib
-from openai import OpenAI
+from utils import query_llm_llamafile, get_batting_stats, get_pitching_stats
 
-
-def get_batting_stats(player: str = None, year: int = 2024):
-    """
-    Get all of the hitting statistics for a specified MLB player
-    Args:
-        player - string of player full name
-        year - year to get stats for, default is 2024 the current year
-    Returns:
-        if player exists:
-            batting_stats - a list of stats for the specified player
-        else:
-            string error message suggesting similar player names
-    """
-    all_batting_stats = pyb.batting_stats(year)
-    if player:
-        if player in all_batting_stats['Name'].values:
-            return all_batting_stats.loc[all_batting_stats.Name == player]
-        else:
-            # Find and suggest similar names
-            similar_names = difflib.get_close_matches(player, all_batting_stats['Name'].values)
-            if similar_names:
-                return f"Unable to find player. Did you mean: {', '.join(similar_names)}?"
-            else:
-                return "Unable to find player."
-    else:
-        return all_batting_stats
-
-def get_pitching_stats(player: str = None, year: int = 2024):
-    """
-    Get all of the pitching statistics for a specified MLB player
-    Args:
-        player - string of player full name
-        year - year to get stats for, default is 2024 the current year
-    Returns:
-        if player exists:
-            pitching_stats - a list of stats for the specified player
-        else:
-            string error message suggesting similar player names
-    """
-    all_pitching_stats = pyb.pitching_stats(year)
-    if player:
-        if player in all_pitching_stats['Name'].values:
-            return all_pitching_stats.loc[all_pitching_stats.Name == player]
-        else:
-            # Find and suggest similar names
-            similar_names = difflib.get_close_matches(player, all_pitching_stats['Name'].values)
-            if similar_names:
-                return f"Unable to find player. Did you mean: {', '.join(similar_names)}?"
-            else:
-                return "Unable to find player."
-    else:
-        return all_pitching_stats
     
+def extract_player_llm(user_input):
+    # Extract player name from this user question
+    sys_prompt = '''
+    Your sole purpose is to extract a list of player names from the user input.
+    The input will be some sort of question or statement that contains one or more player names.
+    You should extract all of the player names from the input and return them as a list.
+    DO NOT RETURM ANYHING ELSE EXCEPT THE PLAYER NAME LIST!!!
 
-def query_llm_llamafile(prompt):
-    client = OpenAI(
-        base_url= "http://127.0.0.1:8080/v1", # "http://<Your api-server IP>:port"
-        api_key = "sk-no-key-required"
-    )
-    completion = client.chat.completions.create(
-        model="LLaMA_CPP",
-        max_tokens = 150,
-        temperature = 0,
-        messages=[
-            {"role": "system", "content": 
-             """
-             You are Baseball Helper 5000, an AI assistant. 
-             Your top priority is determining which helpful baseball stats function to call based on the user input.
-             Based on the user input, determine the player they are asking about as well as whether they are a batter or a pitcher.
-             If you cannot determine this, ask a clarifying question, otherwise call the corresponding function.
-             NO EXPLANATIONS!
-             If multiple calls are needed, call all of the corresponding functions.    
-             Function:
-                def get_batting_stats(player: str = None, year: int = 2024):
-                    ""
-                    Get all of the hitting statistics for a specified MLB player
-                    Args:
-                        player - string of player full name
-                        year - year to get stats for, default is 2024 the current year
-                    Returns:
-                        if player exists:
-                            batting_stats - a list of stats for the specified player
-                        else:
-                            string error message suggesting similar player names
-                    ""
-            Function:
-                def get_pitching_stats(player: str = None, year: int = 2024):
-                    ""
-                    Get all of the pitching statistics for a specified MLB player
-                    Args:
-                        player - string of player full name
-                        year - year to get stats for, default is 2024 the current year
-                    Returns:
-                        if player exists:
-                            pitching_stats - a list of stats for the specified player
-                        else:
-                            string error message suggesting similar player names
-                    ""
-            JUST GIVE POPULATED CALL FUNCTION, NO THOUGHT OR EXPLANATION!
-            If you need more information about the function call, ask a clarifying question.
-            For example, "What is the player's full name" or "Are they a batter or a pitcher?"
-            """
-             },
-            {"role": "user", "content": f"{prompt}<human_end>"}
-        ]
-    )
-    return completion.choices[0].message
+    Examples:
+    Input: "How well are CJ Abrams and DJ Herz doing this season?"
+    Ouput: ["CJ Abrams", "DJ Herz"]
+
+    Input: "Should I trade Pual Goldschmidt for Jake Irvin?"
+    Output: ["Paul Goldschmidt", "Jake Irvin"]
+
+    Input: "What is Luis Garcia's batting average?"
+    Output: ["Luis Garcia"]
+    '''
+    response = query_llm_llamafile(user_input, sys_prompt)
+    return response
+
+
+def get_player_stats(players: list):
+    """
+    Get all of the stats for a list of MLB players, searching both hitting and pitching stats.
+    Args:
+        players - list of player full names
+    Returns:
+        A dictionary where keys are player names and values are dictionaries containing their stats
+    """
+    player_stats_dict = {}
+
+    for player in players:
+        hit_status, hit_stats = get_batting_stats(player)
+        pitch_status, pitch_stats = get_pitching_stats(player)
+        
+        if hit_status == 200:
+            player_stats_dict[player] = {
+                "Type": "Hitter",
+                "Stats": hit_stats
+            }
+        elif pitch_status == 200:
+            player_stats_dict[player] = {
+                "Type": "Pitcher",
+                "Stats": pitch_stats
+            }
+        elif hit_status == 405:
+            player_stats_dict[player] = {
+                "Type": "Unknown",
+                "Message": hit_stats  # The 405 message from hitting stats
+            }
+        elif pitch_status == 405:
+            player_stats_dict[player] = {
+                "Type": "Unknown",
+                "Message": pitch_stats  # The 405 message from pitching stats
+            }
+        elif hit_status == 404 and pitch_status == 404:
+            player_stats_dict[player] = {
+                "Type": "Unknown",
+                "Message": "Unable to find player."
+            }
+
+    return player_stats_dict
+
+def answer_baseball_question(user_question):
+    """
+    Given a user question, return the answer using the LLM model after 
+    extracting the players and retrieveing their respective stats.
+
+    Args:
+        user_question - string of the user's question
+    Returns:
+        string of the model's response
+    """
+    extracted_players = extract_player_llm(user_question)
+    print(f"Extracted players: {extracted_players}")
+    player_stats = get_player_stats(list(extracted_players))
+    print(f"Player stats: {player_stats}")
+    return player_stats
 
 if __name__ == '__main__':
-    print(get_batting_stats("CJ Abras"))
-    print(get_pitching_stats("Jake Irvin"))
-    # response = query_llm_llamafile("How is CJ Abrams, hitter, and Jake Irvin, pitcher, performing this year?")
-    # print(response)
+    players = ["CJ Abrms", "DJ Herz", "Jake Irvin"]
+    player_stats = get_player_stats(players)
+    print(player_stats)
