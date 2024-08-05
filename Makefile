@@ -26,5 +26,3 @@ docker: build run
 llamafile:
 	bash run_llama_model.sh
 
-hf_file:
-	bash run_hf_model.sh
