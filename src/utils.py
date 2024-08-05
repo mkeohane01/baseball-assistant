@@ -28,7 +28,7 @@ def query_llm_llamafile(user_prompt, system_prompt):
             {"role": "user", "content": f"<human_start>{user_prompt}<human_end>"}
         ]
     )
-    return completion.choices[0].message.content
+    return completion.choices[0].message.content.split('<|')[0]
 
 
 def get_batting_stats(player: str):

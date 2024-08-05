@@ -1,6 +1,7 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, Blueprint
 from src.llm_pipelining import answer_baseball_question
-app = Flask(__name__)
+
+app = Blueprint('app', __name__)
 
 @app.route('/')
 def index():

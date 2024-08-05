@@ -1,6 +1,7 @@
 import pybaseball as pyb
 import difflib
-from utils import query_llm_llamafile, get_batting_stats, get_pitching_stats
+import json
+from src.utils import query_llm_llamafile, get_batting_stats, get_pitching_stats
 
     
 def extract_player_llm(user_input):
@@ -78,8 +79,9 @@ def answer_baseball_question(user_question):
         string of the model's response
     """
     extracted_players = extract_player_llm(user_question)
-    print(f"Extracted players: {extracted_players}")
-    player_stats = get_player_stats(list(extracted_players))
+    parsed_players = json.loads(extracted_players)
+    print(f"Extracted players: {parsed_players}")
+    player_stats = get_player_stats(parsed_players)
     print(f"Player stats: {player_stats}")
     return player_stats
 
