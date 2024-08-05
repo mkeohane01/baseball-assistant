@@ -4,7 +4,7 @@ import difflib
 
 DATABASE = 'baseball_stats.db'
 
-def query_llm_llamafile(user_prompt, system_prompt):
+def query_llm_llamafile(user_prompt, system_prompt, max_tokens = 200):
     """
     Query the llamafile model with a user prompt and system prompt'
     Args:
@@ -19,7 +19,7 @@ def query_llm_llamafile(user_prompt, system_prompt):
     )
     completion = client.chat.completions.create(
         model="LLaMA_CPP",
-        max_tokens = 150,
+        max_tokens = max_tokens,
         temperature = 0,
         messages=[
             {"role": "system", "content": 
@@ -29,7 +29,6 @@ def query_llm_llamafile(user_prompt, system_prompt):
         ]
     )
     return completion.choices[0].message.content.split('<|')[0]
-
 
 def get_batting_stats(player: str):
     """
@@ -47,11 +46,17 @@ def get_batting_stats(player: str):
 
     query = "SELECT * FROM HittingStats2024 WHERE Name = ?"
     cursor.execute(query, (player,))
-    player_stats = cursor.fetchall()
+    player_stats = cursor.fetchone()
 
+    batting_keys = [
+        'ID', 'Name', 'Team', 'Age', 'G', 'PA', 'AB', 'Hits', '1B', '2B', '3B', 'HR', 'R', 'RBI', 'BB', 
+        'SO', 'HBP', 'SF', 'AVG', 'OBP', 'SLG', 'OPS', 'ISO', 'BABIP', 'wOBA', 'wRAA', 'wRC', 'wRC+', 
+        'WAR', 'BsR', 'Spd', 'UBR', 'wSB', 'Off', 'Def', 'Pos', 'RAR', 'Barrel%', 'maxEV', 'HardHit%', 'CSW%', 
+        'xBA', 'xSLG', 'xwOBA'
+    ]
     if player_stats:
         conn.close()
-        return 200, player_stats
+        return 200, dict(zip(batting_keys, player_stats))
     else:
         cursor.execute("SELECT Name FROM HittingStats2024")
         all_names = [row[0] for row in cursor.fetchall()]
@@ -78,11 +83,15 @@ def get_pitching_stats(player: str):
 
     query = "SELECT * FROM PitchingStats2024 WHERE Name = ?"
     cursor.execute(query, (player,))
-    player_stats = cursor.fetchall()
-
+    player_stats = cursor.fetchone()
+    pitching_keys = keys = [
+    "ID", "Name", "Team", "Age", "W", "L", "ERA", "G", "GS", "SV", "IP", "SO", "BB", "HR", "WHIP", 
+    "FIP", "xFIP", "K9", "BB9", "KPercent", "BBPercent", "BABIP", "LOBPercent", "StuffPlus", "LocationPlus", 
+    "PitchingPlus", "xERA", "HardHitPercent", "CSWPercent"
+    ]
     if player_stats:
         conn.close()
-        return 200, player_stats
+        return 200, dict(zip(pitching_keys, player_stats))
     else:
         cursor.execute("SELECT Name FROM PitchingStats2024")
         all_names = [row[0] for row in cursor.fetchall()]

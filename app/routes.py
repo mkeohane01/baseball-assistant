@@ -1,8 +1,8 @@
-from flask import Flask, request, jsonify, render_template, Blueprint
+from flask import request, jsonify, render_template, Blueprint
 from src.llm_pipelining import answer_baseball_question
 
 app = Blueprint('app', __name__)
-
+ 
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -16,6 +16,3 @@ def ask():
     answer = answer_baseball_question(question)
     print(answer)
     return jsonify({'answer': answer})
-
-if __name__ == '__main__':
-    app.run(debug=True)
