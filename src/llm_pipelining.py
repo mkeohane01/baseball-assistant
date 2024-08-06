@@ -23,7 +23,7 @@ def extract_player_llm(user_input):
     Output: ["Luis Garcia"]
     '''
     response = query_llm_llamafile(user_input, sys_prompt)
-    return response
+    return json.loads(response)
 
 
 def get_player_stats(players: list):
@@ -117,9 +117,8 @@ def answer_baseball_question(user_question):
         string of the model's response
     """
     extracted_players = extract_player_llm(user_question)
-    parsed_players = json.loads(extracted_players)
-    print(f"Extracted players: {parsed_players}")
-    player_stats = get_player_stats(parsed_players)
+    print(f"Extracted players: {extracted_players}")
+    player_stats = get_player_stats(extracted_players)
     print(f"Player stats: {player_stats}")
     response = generate_response_using_data(user_question, player_stats)
     return response

@@ -5,6 +5,9 @@ install:
 unit-test:
 	python -m pytest -vv tests/test_app.py
 
+llm-test:
+	python tests/test_llmpipeline.py
+
 format:	
 	black app/*.py 
 

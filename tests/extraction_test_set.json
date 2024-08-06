@@ -1,0 +1,263 @@
+[
+    {
+        "input": "Which second baseman is having a better season, Luis Garcia or Brendan Donovan?",
+        "output": [
+            "Luis Garcia",
+            "Brendan Donovan"
+        ]
+    },
+    {
+        "input": "Who has more home runs, Mike Trout or Aaron Judge?",
+        "output": [
+            "Mike Trout",
+            "Aaron Judge"
+        ]
+    },
+    {
+        "input": "Is Clayton Kershaw or Max Scherzer pitching better this year?",
+        "output": [
+            "Clayton Kershaw",
+            "Max Scherzer"
+        ]
+    },
+    {
+        "input": "Who is a better shortstop, Fernando Tatis Jr. or Francisco Lindor?",
+        "output": [
+            "Fernando Tatis Jr.",
+            "Francisco Lindor"
+        ]
+    },
+    {
+        "input": "Who has more RBIs, Freddie Freeman or Paul Goldschmidt?",
+        "output": [
+            "Freddie Freeman",
+            "Paul Goldschmidt"
+        ]
+    },
+    {
+        "input": "Which outfielder has a higher batting average, Mookie Betts or Bryce Harper?",
+        "output": [
+            "Mookie Betts",
+            "Bryce Harper"
+        ]
+    },
+    {
+        "input": "Is Gerrit Cole or Jacob deGrom the better pitcher?",
+        "output": [
+            "Gerrit Cole",
+            "Jacob deGrom"
+        ]
+    },
+    {
+        "input": "Who is performing better, Jose Altuve or Ozzie Albies?",
+        "output": [
+            "Jose Altuve",
+            "Ozzie Albies"
+        ]
+    },
+    {
+        "input": "Who is the better third baseman, Nolan Arenado or Manny Machado?",
+        "output": [
+            "Nolan Arenado",
+            "Manny Machado"
+        ]
+    },
+    {
+        "input": "Is Juan Soto or Ronald Acuna Jr. having a better season?",
+        "output": [
+            "Juan Soto",
+            "Ronald Acuna Jr."
+        ]
+    },
+    {
+        "input": "Who has more stolen bases, Trea Turner or Whit Merrifield?",
+        "output": [
+            "Trea Turner",
+            "Whit Merrifield"
+        ]
+    },
+    {
+        "input": "Who is a better closer, Josh Hader or Aroldis Chapman?",
+        "output": [
+            "Josh Hader",
+            "Aroldis Chapman"
+        ]
+    },
+    {
+        "input": "Which pitcher has a better ERA, Shane Bieber or Lucas Giolito?",
+        "output": [
+            "Shane Bieber",
+            "Lucas Giolito"
+        ]
+    },
+    {
+        "input": "Who is a better catcher, J.T. Realmuto or Yasmani Grandal?",
+        "output": [
+            "J.T. Realmuto",
+            "Yasmani Grandal"
+        ]
+    },
+    {
+        "input": "Which first baseman has more hits, Anthony Rizzo or Pete Alonso?",
+        "output": [
+            "Anthony Rizzo",
+            "Pete Alonso"
+        ]
+    },
+    {
+        "input": "Who is playing better, Corey Seager or Carlos Correa?",
+        "output": [
+            "Corey Seager",
+            "Carlos Correa"
+        ]
+    },
+    {
+        "input": "Who has a higher on-base percentage, Joey Votto or Eric Hosmer?",
+        "output": [
+            "Joey Votto",
+            "Eric Hosmer"
+        ]
+    },
+    {
+        "input": "Is Xander Bogaerts or Tim Anderson having a better season?",
+        "output": [
+            "Xander Bogaerts",
+            "Tim Anderson"
+        ]
+    },
+    {
+        "input": "Who has more strikeouts, Blake Snell or Charlie Morton?",
+        "output": [
+            "Blake Snell",
+            "Charlie Morton"
+        ]
+    },
+    {
+        "input": "Which left fielder is better, Michael Brantley or Marcell Ozuna?",
+        "output": [
+            "Michael Brantley",
+            "Marcell Ozuna"
+        ]
+    },
+    {
+        "input": "Who has more saves, Liam Hendriks or Kenley Jansen?",
+        "output": [
+            "Liam Hendriks",
+            "Kenley Jansen"
+        ]
+    },
+    {
+        "input": "Who is leading in batting average, Vladimir Guerrero Jr. or Yordan Alvarez?",
+        "output": [
+            "Vladimir Guerrero Jr.",
+            "Yordan Alvarez"
+        ]
+    },
+    {
+        "input": "Which pitcher has more wins, Zack Greinke or Madison Bumgarner?",
+        "output": [
+            "Zack Greinke",
+            "Madison Bumgarner"
+        ]
+    },
+    {
+        "input": "Is Aaron Nola or Kyle Hendricks pitching better this season?",
+        "output": [
+            "Aaron Nola",
+            "Kyle Hendricks"
+        ]
+    },
+    {
+        "input": "Who has more triples, Ketel Marte or Adalberto Mondesi?",
+        "output": [
+            "Ketel Marte",
+            "Adalberto Mondesi"
+        ]
+    },
+    {
+        "input": "Who is the better center fielder, George Springer or Starling Marte?",
+        "output": [
+            "George Springer",
+            "Starling Marte"
+        ]
+    },
+    {
+        "input": "Should I trade CJ Abrams for Jack Flaherty?",
+        "output": [
+            "CJ Abrams",
+            "Jack Flaherty"
+        ]
+    },
+    {
+        "input": "Who among Trea Turner, Elly De La Cruz, and Bobby Witt Jr. are the fastest?",
+        "output": [
+            "Trea Turner",
+            "Elly De La Cruz",
+            "Bobby Witt Jr."
+        ]
+    },
+    {
+        "input": "What is CJ Herz's ERA?",
+        "output": [
+            "CJ Herz"
+        ]
+    },
+    {
+        "input": "Who has the most home runs among Pete Alonso, Bryce Harper, and Shohei Ohtani?",
+        "output": [
+            "Pete Alonso",
+            "Bryce Harper",
+            "Shohei Ohtani"
+        ]
+    },
+    {
+        "input": "Is Bryce Harper or Mike Trout better at hitting?",
+        "output": [
+            "Bryce Harper",
+            "Mike Trout"
+        ]
+    },
+    {
+        "input": "Who has more wins this season, Gerrit Cole or Justin Verlander?",
+        "output": [
+            "Gerrit Cole",
+            "Justin Verlander"
+        ]
+    },
+    {
+        "input": "Who is faster, Mookie Betts or Trea Turner?",
+        "output": [
+            "Mookie Betts",
+            "Trea Turner"
+        ]
+    },
+    {
+        "input": "Who has a better ERA, Max Scherzer or Zack Greinke?",
+        "output": [
+            "Max Scherzer",
+            "Zack Greinke"
+        ]
+    },
+    {
+        "input": "Who is the better player, Cody Bellinger or Christian Yelich?",
+        "output": [
+            "Cody Bellinger",
+            "Christian Yelich"
+        ]
+    },
+    {
+        "input": "Is Rafael Devers or Alex Bregman a better third baseman?",
+        "output": [
+            "Rafael Devers",
+            "Alex Bregman"
+        ]
+    },
+    {
+        "input": "Who is leading in strikeouts, Blake Snell, Gerrit Cole, or Jacob deGrom?",
+        "output": [
+            "Blake Snell",
+            "Gerrit Cole",
+            "Jacob deGrom"
+        ]
+    }
+]
