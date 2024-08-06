@@ -2,8 +2,8 @@ install:
 	pip install --upgrade pip &&\
 		pip install -r requirements.txt
 
-test:
-	python -m pytest -vv 
+unit-test:
+	python -m pytest -vv tests/test_app.py
 
 format:	
 	black app/*.py 
