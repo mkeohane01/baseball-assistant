@@ -84,9 +84,13 @@ def generate_response_using_data(user_question, player_stats_dict):
     formatted_stats = ""
     for player, details in player_stats_dict.items():
         player_type = details["Type"]
-        stats = details["Stats"]
-        stats_str = ", ".join(f"{key}: {value}" for key, value in stats.items())
-        formatted_stats += f"{player} ({player_type}): {stats_str}\n"
+        if player_type == "Unknown":
+            error = details["Message"]
+            formatted_stats += f"{player} : {error}\n"
+        else:
+            stats = details["Stats"]
+            stats_str = ", ".join(f"{key}: {value}" for key, value in stats.items())
+            formatted_stats += f"{player} ({player_type}): {stats_str}\n"
 
     sys_prompt = f'''
     Your task is to provide an answer to the following baseball related question based on the given player stats.
